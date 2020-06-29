@@ -17,6 +17,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import BottomNavBar from './BottomNavBar'
 import BottomNavBarHD from './BottomNavBarHD'
 import Eworkplace3 from '../../image/eworkplace3.svg'
+import EditProfile from '../screens/EditProfile';
+import ListProfile from '../screens/ListProfile';
 
 const Stack = createStackNavigator();
 function HeaderRight () {
@@ -99,6 +101,9 @@ function MyStack() {
       <Stack.Screen name="OverworkForm" component={OverworkForm} options={{headerTitle:'Overwork Form'}}/> 
       <Stack.Screen name="Meetings" component={Meetings} options={{headerTitle:'Meetings',}}/>
       <Stack.Screen name="TaskDone" component={TaskDone} options={{headerTitle:'Task Done',}}/>  
+
+      <Stack.Screen name="ListProfile" component={ListProfile} options={{ headerTitle: 'Profile', }} />  
+
     </Stack.Navigator>
   );
 }

@@ -1,5 +1,5 @@
 {
-  "name": "E_WorkPlaceAndroid",
+  "name": "e_workplaceandroid",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -57,5 +57,17 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "description": "![Image of Eworkpalce](/image/ss1.png)>![Image of Eworkpalce](/image/ss2.png)\r ![Image of Eworkpalce](/image/ss3.png)>![Image of Eworkpalce](/image/ss4.png)\r ![Image of Eworkpalce](/image/ss5.png) <br/>\r E workpalce is a mobile application that is made for employee of moonlay technologies. The features contained in this application are: <br/>\r 1. Login and logout <br/>\r 2. Clock in at office <br/>\r 3. Clock in at home <br/>\r 4. Clock in at client office <br/>\r 5. Sick form  <br/>\r 6. Location radius validation (Only works on clock in at office features, max radius from office is 80 meters) <br/>\r 7. Profile page <br/>\r 8. Monthly clock in history <br/>\r 9. Clock in approval page (Only for Head Divisions) <br/>",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hosea1005/id.co.moonlay-eworkplace-mobile.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hosea1005/id.co.moonlay-eworkplace-mobile/issues"
+  },
+  "homepage": "https://github.com/Hosea1005/id.co.moonlay-eworkplace-mobile#readme"
 }

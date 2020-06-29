@@ -14,6 +14,7 @@ import ProfileEdit from '../../image/profile-edit.svg'
 import axios from 'axios';
 import moment from 'moment';
 import {Url_Clockin} from '../config/URL'
+import Icon from 'react-native-vector-icons/AntDesign';
 
 class Profile extends Component {
   constructor(props){
@@ -41,7 +42,7 @@ class Profile extends Component {
       this.loadData = this.loadData.bind(this);
       this.movetoClockinHistory = this.movetoClockinHistory.bind(this);
       this.movetoOverworkForm = this.movetoOverworkForm.bind(this);
-      this.ChoosePhotoProfile = this.ChoosePhotoProfile.bind(this);
+      this.goToListProfile = this.goToListProfile.bind(this);
   }
 
   async componentDidMount(){
@@ -113,13 +114,14 @@ class Profile extends Component {
       }
     }
 
-    ChoosePhotoProfile(){
-      alert('Under Development!')
+    goToListProfile(){
+      this.props.navigation.navigate('ListProfile')
     }
 
-    movetoClockinHistory(){
-      this.props.navigation.navigate('ClockinHistory')
-    }
+    
+  movetoClockinHistory() {
+    this.props.navigation.navigate('PaySlip')
+  }
 
     movetoOverworkForm(){
       this.props.navigation.navigate('OverworkForm')
@@ -134,7 +136,9 @@ class Profile extends Component {
                   <RefreshControl refreshing={this.state.refreshing} 
                 onRefresh={this.loadData} />
               }>
+                
                   <View style={styles.view1}>
+                  <TouchableOpacity onPress={this.goToListProfile}>
                     <Card containerStyle={styles.card}>
                       <View style={{flexDirection:'row'}}>
                       <View style={{flex:3, paddingLeft:30}}>
@@ -148,71 +152,29 @@ class Profile extends Component {
                         <Text style={styles.text2}>{this.state.name}</Text>
                         <Text style={styles.text3}>{this.state.jobTitle}</Text>
                       </View>
+                     </View>     
+                    </Card>
+                  </TouchableOpacity>
+                    
+                  <TouchableOpacity >
+                    
+                  
+                    <Card containerStyle={styles.card1}>
+                      <View style={{flexDirection:'row'}}>
+                      <Icon name="creditcard" size={50} />
+                      <View >
+                        <Text style={styles.textPaySlip}>PaySlip</Text>
+                      </View>
+                      
                       <View>
-                        <TouchableOpacity style={{alignSelf:'flex-end', width:40, height:30, alignItems:'flex-end'}} onPress={this.ChoosePhotoProfile}>
-                          <ProfileEdit width={25} height={25}/>
-                        </TouchableOpacity> 
+                      
                       </View>
                      </View>     
                     </Card>
+                  </TouchableOpacity> 
                   </View>
-                  <View style={{ flexDirection:'row'}}>
-                    <Card containerStyle={styles.dcard}>
-                    <Text style={styles.text4}>Day Off</Text>
-                     <View style={{flexDirection:'row'}}>
-                       <Text style={styles.text5}>-</Text>
-                       <Text style={styles.text6}>Days {'\n'}Remaining</Text>
-                     </View>                 
-                    </Card>
-                    <Card containerStyle={styles.dcard}> 
-                     <Text style={styles.text4}>Overtime</Text>
-                     <View style={{flexDirection:'row'}}>
-                       <Text style={styles.text5}>--</Text>
-                       <Text style={styles.text7}>Hours</Text>
-                     </View>
                   
-                    </Card>
-                    <Card containerStyle={styles.dcard}>
-                      <TouchableOpacity onPress={this.movetoOverworkForm}>                   
-                        <Text style={styles.text4}>Overtime</Text>
-                        <Text style={styles.text4}>Form</Text>
-                        <FontAwesome5 name='file-alt' size={20} color='#505050' style={{alignSelf:'flex-end', marginTop:'15%'}}/>
-                      </TouchableOpacity>                
-                    </Card>
-                  </View>
-                  <View style={{ width:'100%', alignSelf:'center'}}>
-                    <Text style={styles.text8}>History</Text>
-                    <Text style={styles.textMonth}>{this.state.monthYear}</Text>
-                  </View>
-                  <View style={styles.cardHistory} >
-                      {this.state.history.map((u, i) => {
-                        const clockinTime = moment(u.CheckIn).add(7, 'hours').format('YYYY-MM-DD hh:mm:ss A');
-                        const clockoutTime = moment(u.CheckOut).add(7, 'hours').format('YYYY-MM-DD hh:mm:ss A');
-                        const clockin = clockinTime.substr(11,5)+' '+clockinTime.substr(20,15)
-                        var clockout = '';
-                        if(clockoutTime.substr(11,5) === '07:00' && clockoutTime.substr(20,15) === 'AM'){
-                            clockout = 'Now'
-                        }
-                        else{
-                            clockout = clockoutTime.substr(11,5)+' '+clockoutTime.substr(20,15)
-                        }
-                          return (
-                            <View key={i} style={styles.history}>
-                                <View style={{flex:1, marginLeft:10, justifyContent:'center'}}>
-                                    <Text style={styles.Text}>{u.CheckIn.substr(8,2)+' / '+u.CheckIn.substr(5,2) +' / '+u.CheckIn.substr(0,4)}</Text>
-                                </View>
-                                <View style={{flex:1, alignItems:'flex-end', marginRight:10, justifyContent:'center'}}>
-                                    <Text style={styles.Text}>{clockin+'-'+clockout}</Text>
-                                </View>
-                            </View>
-                          );
-                        })
-                      }
-                      <Text style={[styles.textStatus,{display: this.state.history.length === 0 ? 'flex':'none'}]}>No History</Text>
-                  </View>
-                    <TouchableOpacity style={{width:'40%', alignSelf:'center'}} onPress={this.movetoClockinHistory}>
-                       <Text style={styles.textVD}>View More History</Text>
-                    </TouchableOpacity>
+                    
                   <TouchableOpacity style={styles.Button} onPress={this.LogOut}>
                       <Text style={styles.textLogOut}>Log Out</Text>
                   </TouchableOpacity>
@@ -239,7 +201,17 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-    elevation: 3, borderRadius:7,
+    elevation: 3, borderRadius:15,
+  },
+  card1: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3, borderRadius: 15,
   },
   viewPhoto:{
     backgroundColor:'#d4d4d4', width:100, height:100, alignSelf:'center', borderRadius:100/2, justifyContent:'center', alignItems:'center', marginTop:5 
@@ -274,13 +246,16 @@ const styles = StyleSheet.create({
     color:'white', textAlign:'center', fontSize:20, fontFamily:'Nunito-SemiBold', fontWeight:'600',
   },
   Button: {
-    backgroundColor:'#1A446D', marginTop:20, height:50, justifyContent:'center'
+    backgroundColor:'#1A446D', marginBottom:20, marginTop:180, height:50, justifyContent:'center'
   },
   text1:{
     textAlign:'center', fontSize:15, fontFamily:'Nunito-Light', fontWeight:'300', color:'#505050', marginTop:20
   },
   text2:{
     textAlign:'center', fontSize:20, fontFamily:'Nunito-Bold', fontWeight:'600', color:'#505050', marginTop:5
+  },
+  textPaySlip: {
+    textAlign: 'center', fontSize: 30, fontFamily: 'Nunito-Bold', fontWeight: '600', color: '#505050', marginLeft:15
   },
   text3:{
     textAlign:'center', fontSize:15, fontFamily:'Nunito-Light', fontWeight:'300',  color:'#505050',
